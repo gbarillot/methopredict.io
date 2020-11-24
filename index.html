@@ -51,14 +51,15 @@
         font-size: 16px;
         font-weight: normal;
       }
-      .left-col ul {
+      ul {
         list-style-type: none;
         margin: 0px 0 0 0;
         padding: 20px;
         background-color: rgba(255, 255, 255, 0.6);
         float: right;
         box-shadow: 0px 0px 5px 0px #656565;
-        width: 440px;
+        min-width: 444px;
+        max-width: 444px;
       }
       ul li {
         padding: 10px;
@@ -78,7 +79,7 @@
         width: 20px;
         height: 20px;
         font-size: 12px;
-        cursor: help;
+        cursor: pointer;
         border-radius: 50%;
         text-align: center;
         float: right;
@@ -124,7 +125,7 @@
         text-align: left;
         width: 100%;
         max-width: 600px;
-        height: 607px;
+        min-height: 607px;
         float: left;
         margin-left: 90px;
         padding-left: 0;
@@ -135,10 +136,14 @@
       }
       .result {
         background-color: #fff;
-        padding: 20px;        
-        padding-top: 10px;
+        padding: 10px;        
         border: 1px solid #ccc;
         margin-bottom: 20px;
+      }
+      .result p:last-child {
+        font-size: 30px;
+        font-style: italic;
+        font-weight: lighter;
       }
       .hidden {
         display: none;
@@ -206,19 +211,29 @@
         padding-top: 14px;
         background-color: rgba(255, 255, 255, 0.8) !important; 
       }
-      @media screen and (max-width: 1200px) {
+      @media screen and (max-width: 1120px) {
         .container {
           margin: 50px 10px 0 10px;
         }
         .results {
           margin-left: 10px;
           width: 98%;
+          max-width: none;
+          height: auto;
         }
         ul {
-          width: auto;
+          width: 100%;
+          min-width: 0;
+        }
+        #about {
+          height: auto;
+          overflow: visible;
         }
       }
       @media screen and (max-width: 768px) {
+        h1 {
+          margin-top: 10px;
+        }
         .container {
           margin: 0 10px 0 10px;
         }
@@ -229,6 +244,8 @@
           margin-top: 40px;
           margin-bottom: 60px;
           position: static;
+          height: auto;
+          min-height: 0;
         }
         .left-col {
           width: 100%;
@@ -240,6 +257,7 @@
         ul {
           width: 100%;
           padding: 10px;
+          max-width: 100%;
         }
         ul li {
           float: none;
@@ -275,26 +293,29 @@
       <div class="left-col" id="form">
         <ul>
           <li>
-            <label><span data-t="age"></span><i class="tooltip" onClick="openTip(1)" style="cursor: pointer">?</i></label>
-            <p class="helper hidden" data-tip="1">Seules les métastases visibles sur radio de thorax sont comptées</p>
+            <label><span data-t="age"></span><i class="tooltip" onClick="openTip(1)">?</i></label>
+            <p class="helper hidden" data-tip="1"><span data-t="age_help"></span></p>
             <select onChange="show()" id="select-1">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="previous_pregnancy_abbr"></span><i class="tooltip" data-t="previous_pregnancy" title="">?</i></label>
+            <label><span data-t="previous_pregnancy_abbr"></span><i class="tooltip" onClick="openTip(2)">?</i></label>
+            <p class="helper hidden" data-tip="2"><span data-t="previous_pregnancy"></span></p>
             <select onChange="show()" id="select-2">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="s_interva_abbr"></span><i class="tooltip" data-t="s_interva" title="">?</i></label>
+            <label><span data-t="s_interva_abbr"></span><i class="tooltip" onClick="openTip(3)">?</i></label>
+            <p class="helper hidden" data-tip="3"><span data-t="s_interva"></span></p>
             <select onChange="show()" id="select-3">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="hcg"></span></label>
+            <label><span data-t="hcg"></span><i class="tooltip" onClick="openTip(4)">?</i></label>
+            <p class="helper hidden" data-tip="4"><span data-t="hcg_help"></span></p>
             <select onChange="show()" id="select-4">
               <option value="0">...</option>
               <option value="1">&lt; 1000 UI/l</option>
@@ -304,7 +325,8 @@
             </select>
           </li>
           <li>
-            <label><span data-t="tumor_diametra"></span></label>
+            <label><span data-t="tumor_diametra"></span><i class="tooltip" onClick="openTip(5)">?</i></label>
+            <p class="helper hidden" data-tip="5"><span data-t="tumor_diametra_help"></span></p>
             <select onChange="show()" id="select-5">
               <option value="0">...</option>
               <option value="1">&lt; 3 cm</option>
@@ -316,11 +338,11 @@
             <label><span data-t="metastase_location"></span></label>
             <select onChange="show()" id="select-6">
               <option value="0">...</option>
-
             </select>
           </li>
           <li>
-            <label><span data-t="metastase_number"></span></label>
+            <label><span data-t="metastase_number"></span><i class="tooltip" onClick="openTip(6)">?</i></label>
+            <p class="helper hidden" data-tip="6"><span data-t="metastase_number_help"></span></p>
             <select onChange="show()" id="select-7">
               <option value="0">...</option>
               <option value="1">Pas de métastase</option>
@@ -342,21 +364,17 @@
           </div>
 
           <h1>Méthopredict</h1>
-          <h2>Centre Français de Référence des Maladies Trophoblastiques</h2>
+          <h2><span data-t="title">Centre Français de Référence des Maladies Trophoblastiques</span></h2>
 
           <p id="placeholder"><span data-t="placeholder"></span></p>
           <div id="active">
             <div class="result" id="result-1">
-              <p><span data-t="total"></span></p>
-              <b id="data-1"></b>
+              <p><b><span data-t="total"></span></b></p>
+              <p id="data-1"></p>
             </div>
             <div class="result" id="result-2">
-              <p><span data-t="probability_success"></span></p>
-              <b id="data-2"></b>            
-            </div>
-            <div class="result" id="result-3">
-              <p><span data-t="probability_failure"></span></p>
-              <b id="data-3"></b>   
+              <p><b><span data-t="probability_success"></span></b></p>
+              <p id="data-2"></p>            
             </div>
             <a href="#" onClick="window.location.reload()"><span data-t="reset"></span></a>  
           </div>
@@ -368,18 +386,8 @@
               <br /><br />
               <span data-t="about_3"></span>  
               <br /><br />
-              <span data-t="about_4"></span> 
-              <br /><br />       
-              <b><span data-t="about_5"></span></b>
-              <ul>
-                <li><span data-t="about_li_1"></span></li>
-                <li><span data-t="about_li_2"></span></li>
-                <li><span data-t="about_li_3"></span></li>
-                <li><span data-t="about_li_4"></span></li>
-                <li><span data-t="about_li_5"></span></li>
-              </ul>   
+              <span data-t="about_4"></span>   
             </p> 
-            <br />
             <a href="#" onClick="go('form')">&laquo; <span data-t="back_to_form"></span></a>
             <div class="clearfix"></div>
           </div>
@@ -514,20 +522,24 @@
 
       var translations = {
         "fr": {
+          "title": "Centre Français de Référence des Maladies Trophoblastiques",
           "about": "A propos",
-          "placeholder": "Veuillez sélectionner les 7 critères dans la colonne de gauche...",
+          "placeholder": "Veuillez sélectionner les 7 critères dans la colonne de gauche.<br /><br /><i>N'hésitez pas à cliquer sur le point d'interrogation afin d'obtenir tous les détails concernant chaque critère.</i>",
           "age": "Age de la patiente",
+          "age_help": "Age de la patiente à ce jour",
           "previous_pregnancy_abbr": "Grossesse précédente",
           "previous_pregnancy": "Grossesse à l’origine de la tumeur trophoblastique",          
           "s_interva_abbr": "Intervalle depuis l’arrêt de la grossesse",
-          "s_interva": "Intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique",
+          "s_interva": "Intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique: il s’agit par exemple de la durée en mois entre le 1er curetage pour une môle et la date de début du méthotrexate",
           "hcg": "hCG",
+          "hcg_help": "Il s’agit de l’hCG le plus récent avant le début du traitement par méthotrexate",
           "tumor_diametra": "Diamètre plus grosse lésion tumorale",
-          "metastase_location": "Site metastases",
+          "tumor_diametra_help": "Il peut s’agir soit de la taille de la tumeur utérine, soit d’une lésion métastatique. Il est nécessaire de choisir la localisation dont le diamètre est le plus grand",
+          "metastase_location": "Site des metastases",
           "metastase_number": "Nombre de metastases",
-          "total": "Effectif total",
+          "metastase_number_help": "Seules les métastases visibles sur radio de thorax sont comptées",
+          "total": "Effectif de patientes correspondant à cet ensemble de paramètres",
           "probability_success": "Probabilité de succès (intervalle de confiance 95%)",
-          "probability_failure": "Probabilité d'échec (intervalle de confiance 95%)",
           "reset": "Réinitialiser",
           "about_content": "Issue de trente années de recherche lorem ipsum dolor sit amet constectetur ad piscim elit",
           "back_to_form": "Revenir au formulaire",
@@ -549,26 +561,25 @@
           "about_1": "Les données présentées sur ce site proviennent de l’analyse rétrospective de la cohorte de 965 patientes enregistrées au Centre Français de Référence (www.mole-chorio.com) entre 1999 et 2019 pour le traitement d’une tumeur trophoblastique gestationnelle à bas risque de résistance à la monochimiothérapie (score FIGO ≤6).",
           "about_2": "La combinaison de chacun des paramètres suivant permet de connaître probabilité observée dans cette cohorte concernant le succès du méthotrexate utilisé selon le schéma 8-day (injection intra-musculaire de 1mg/Kg à J1, J3, J5 et J7 suivi d’acide folique oral 10mg à J2, J4, J6 et J8, les cures recommençant chaque J15).",
           "about_3": "Certaines combinaisons n’ont jamais été rencontrées ou trop peu fréquemment pour fournir une estimation des chances de succès.",
-          "about_4": "Attention: la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques.",
-          "about_5": "Précisions importantes avant utilisation:",
-          "about_li_1": "Grossesse à l’origine de la tumeur trophoblastique: il s’agit de la grossesse dont la tumeur est dérivée. Si la patiente développe une tumeur trophoblastique dans les suites immédiates d’une môle hydatiforme, il faut choisir « môle »",
-          "about_li_2": "intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique: il s’agit par exemple de la durée en mois entre le 1er curetage pour une môle et la date de début du méthotrexate",
-          "about_li_3": "hCG: il s’agit de l’hCG le plus récent avant le début du traitement par méthotrexate",
-          "about_li_4": "diamètre de la plus grosse lésion tumorale: il peut s’agir soit de la taille de la tumeur utérine, soit d’une lésion métastatique. Il est nécessaire de choisir la localisation dont le diamètre est le plus grand",
-          "about_li_5": "nombre de métastases: seules les métastases visibles sur radio de thorax sont comptées"
+          "about_4": "Attention: la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques."
         },
         "en": {
+          "title": "French Reference Center for Trophoblastic Diseases",
           "about": "About",
-          "placeholder": "Please select all 7 criterias from the left column...",
+          "placeholder": "Please select all 7 criterias from the left column.<br /><br /><i>Feel free to click on the question marks to get all details about each item.</i>",
           "age": "Patient age",
+          "age_help": "How old is the patient as of today",
           "previous_pregnancy_abbr": "Previous pregnancy",
           "previous_pregnancy": "Pregnancy that caused the trophoblastic tumor",
           "s_interva_abbr": "Time since last pregnancy interruption",
           "s_interva": "Time since the pregnancy that caused the trophoblastic tumors has been interrupted",
           "hcg": "hCG",
+          "hcg_help": "Most recent hCG before starting treatment with methotrexate",
           "tumor_diametra": "Largest tumor lesion diameter",
+          "tumor_diametra_help": "This may be either the size of the uterine tumor or a metastatic lesion. It is necessary to choose the location with the largest tumor size.",
           "metastase_location": "Metastases location",
           "metastase_number": "Number of metastases",
+          "metastase_number_help": "Only metastases seen on chest X-ray should be considered",
           "total": "Total cohort",
           "probability_success": "Success probability (confidence rate 95%)",
           "probability_failure": "Failure probability (confidence rate 95%)",
@@ -589,13 +600,17 @@
           "metastasis_number_1": "No metastasis",
           "metastasis_number_2": "1 to 4 metastasis",
           "metastasis_number_3": "5 to 8 metastasis",
-          "metastasis_number_4": "More than 8 metastasis"
+          "metastasis_number_4": "More than 8 metastasis",
+          "about_1": "The data presented on this website come from the retrospective analysis of the 965-patient French Reference Center cohort registered on www.mole-chorio.com between 1999 and 2019 for the treatment of a low-risk gestational trophoblastic tumor (FIGO score ≤6).",
+          "about_2": "The combination of each of the following parameters provides an estimation of the methotrexate probability of success when used according to the 8-day protocole (intramuscular injection of 1 mg / Kg on D1, D3, D5 and D7 followed by oral folinic acid rescue at 10mg on D2, D4, D6 and D8, the cures starting again each D15).",
+          "about_3": "Some combinations have never been encountered or too infrequently to provide an estimate of the chances of success.", 
+          "about_4": "Please note: the prescription of methotrexate is the responsibility of a physician, after prior discussion in a multidisciplinary trophoblastic tumors specialized board (Lyon Sud University Hospital). The methotrexate chances of success estimation is provided for information only and does not engage the responsibility of the French Reference Center for Trophoblastic Diseases."
         }
       }
 
       openTip = function(target) {
-        elements = document.querySelectorAll("[data-tip='1']");
-        for (i = 0; i < 7; i++) {
+        elements = document.querySelectorAll("[data-tip]");
+        for (i = 0; i < 6; i++) {
           if(i + 1 == target) {
             if (elements[i].classList.contains('hidden')) {
               elements[i].classList.remove('hidden');
@@ -604,6 +619,8 @@
             }
           }
         }
+
+        return false;
       }
 
       function grab() {
@@ -629,8 +646,7 @@
           document.getElementById('active').classList.remove('hidden');        
         
           document.getElementById('data-1').innerHTML = values[0]; 
-          document.getElementById('data-2').innerHTML = values[1] + "[" + values[2] + ";" + values[3] + "]"; 
-          document.getElementById('data-3').innerHTML = values[4] + "[" + values[5] + ";" + values[6] + "]"; 
+          document.getElementById('data-2').innerHTML = values[1] + " [" + values[2] + ";" + values[3] + "]"; 
         }       
       }
 
