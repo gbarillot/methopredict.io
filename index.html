@@ -40,12 +40,18 @@
         height: 500px;
       }
       h1 {
-        border-bottom: 1px solid  rgb(62, 106, 186);
-        padding-bottom: 20px;
-        margin-bottom: 40px; 
+        padding-bottom: 0px;
+        margin-bottom: 0px; 
         margin-top: 60px;
       }
-      ul {
+      h2 {
+        border-bottom: 1px solid  rgb(62, 106, 186);
+        padding-bottom: 20px;
+        margin-bottom: 10px; 
+        font-size: 16px;
+        font-weight: normal;
+      }
+      .left-col ul {
         list-style-type: none;
         margin: 0px 0 0 0;
         padding: 20px;
@@ -66,6 +72,22 @@
       }
       a {
         color: #666;
+      }
+      i.tooltip {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        cursor: help;
+        border-radius: 50%;
+        text-align: center;
+        float: right;
+        padding-top: 3px;
+        padding-right: 2px;
+        background-color: rgb(95, 131, 196);
+        margin: -2px 0 auto 10px;
+        color: #fff;
+        font-weight: bold;
       }
       select {
         width: 100%;
@@ -125,6 +147,20 @@
         float: right; 
         margin-top: 20px;
       }
+      #about {
+        height: 400px;
+        overflow: scroll;
+      }
+      #about ul {
+        margin-left: 0;
+        padding-left: 20px;
+      }
+      #about ul li span {
+        font-size: 14px;
+      }
+      #placeholder {
+        margin-top: 60px;
+      }
       .top-bar {
         position: absolute;
         top: 20px;
@@ -143,6 +179,12 @@
       .push {
         clear: both;
         height: 0px;
+      }
+      .helper {
+        background-color: rgb(62, 106, 186);
+        color: #fff;
+        text-align: left;
+        padding: 10px; 
       }
       footer {
         clear: both;
@@ -197,6 +239,7 @@
         }
         ul {
           width: 100%;
+          padding: 10px;
         }
         ul li {
           float: none;
@@ -232,19 +275,20 @@
       <div class="left-col" id="form">
         <ul>
           <li>
-            <label><span data-t="age"></span></label>
+            <label><span data-t="age"></span><i class="tooltip" onClick="openTip(1)" style="cursor: pointer">?</i></label>
+            <p class="helper hidden" data-tip="1">Seules les métastases visibles sur radio de thorax sont comptées</p>
             <select onChange="show()" id="select-1">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="previous_pregnancy"></span></label>
+            <label><span data-t="previous_pregnancy_abbr"></span><i class="tooltip" data-t="previous_pregnancy" title="">?</i></label>
             <select onChange="show()" id="select-2">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="s_interva"></span></label>
+            <label><span data-t="s_interva_abbr"></span><i class="tooltip" data-t="s_interva" title="">?</i></label>
             <select onChange="show()" id="select-3">
               <option value="0">...</option>
             </select>
@@ -298,6 +342,7 @@
           </div>
 
           <h1>Méthopredict</h1>
+          <h2>Centre Français de Référence des Maladies Trophoblastiques</h2>
 
           <p id="placeholder"><span data-t="placeholder"></span></p>
           <div id="active">
@@ -317,7 +362,23 @@
           </div>
 
           <div id="about" class="hidden">
-            <p><span data-t="about_content"></span></p> 
+            <p style="font-size: 14px; line-height: 20px;">
+              <span data-t="about_1"></span>
+              <span data-t="about_2"></span>
+              <br /><br />
+              <span data-t="about_3"></span>  
+              <br /><br />
+              <span data-t="about_4"></span> 
+              <br /><br />       
+              <b><span data-t="about_5"></span></b>
+              <ul>
+                <li><span data-t="about_li_1"></span></li>
+                <li><span data-t="about_li_2"></span></li>
+                <li><span data-t="about_li_3"></span></li>
+                <li><span data-t="about_li_4"></span></li>
+                <li><span data-t="about_li_5"></span></li>
+              </ul>   
+            </p> 
             <br />
             <a href="#" onClick="go('form')">&laquo; <span data-t="back_to_form"></span></a>
             <div class="clearfix"></div>
@@ -456,8 +517,10 @@
           "about": "A propos",
           "placeholder": "Veuillez sélectionner les 7 critères dans la colonne de gauche...",
           "age": "Age de la patiente",
-          "previous_pregnancy": "Grossesse précédente",
-          "s_interva": "sInterva",
+          "previous_pregnancy_abbr": "Grossesse précédente",
+          "previous_pregnancy": "Grossesse à l’origine de la tumeur trophoblastique",          
+          "s_interva_abbr": "Intervalle depuis l’arrêt de la grossesse",
+          "s_interva": "Intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique",
           "hcg": "hCG",
           "tumor_diametra": "Diamètre plus grosse lésion tumorale",
           "metastase_location": "Site metastases",
@@ -482,14 +545,26 @@
           "metastasis_number_1": "Pas de métastase",
           "metastasis_number_2": "1 à 4 métastases",
           "metastasis_number_3": "5 à 8 métastases",
-          "metastasis_number_4": "Plus de 8 métastases"
+          "metastasis_number_4": "Plus de 8 métastases",
+          "about_1": "Les données présentées sur ce site proviennent de l’analyse rétrospective de la cohorte de 965 patientes enregistrées au Centre Français de Référence (www.mole-chorio.com) entre 1999 et 2019 pour le traitement d’une tumeur trophoblastique gestationnelle à bas risque de résistance à la monochimiothérapie (score FIGO ≤6).",
+          "about_2": "La combinaison de chacun des paramètres suivant permet de connaître probabilité observée dans cette cohorte concernant le succès du méthotrexate utilisé selon le schéma 8-day (injection intra-musculaire de 1mg/Kg à J1, J3, J5 et J7 suivi d’acide folique oral 10mg à J2, J4, J6 et J8, les cures recommençant chaque J15).",
+          "about_3": "Certaines combinaisons n’ont jamais été rencontrées ou trop peu fréquemment pour fournir une estimation des chances de succès.",
+          "about_4": "Attention: la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques.",
+          "about_5": "Précisions importantes avant utilisation:",
+          "about_li_1": "Grossesse à l’origine de la tumeur trophoblastique: il s’agit de la grossesse dont la tumeur est dérivée. Si la patiente développe une tumeur trophoblastique dans les suites immédiates d’une môle hydatiforme, il faut choisir « môle »",
+          "about_li_2": "intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique: il s’agit par exemple de la durée en mois entre le 1er curetage pour une môle et la date de début du méthotrexate",
+          "about_li_3": "hCG: il s’agit de l’hCG le plus récent avant le début du traitement par méthotrexate",
+          "about_li_4": "diamètre de la plus grosse lésion tumorale: il peut s’agir soit de la taille de la tumeur utérine, soit d’une lésion métastatique. Il est nécessaire de choisir la localisation dont le diamètre est le plus grand",
+          "about_li_5": "nombre de métastases: seules les métastases visibles sur radio de thorax sont comptées"
         },
         "en": {
           "about": "About",
           "placeholder": "Please select all 7 criterias from the left column...",
           "age": "Patient age",
-          "previous_pregnancy": "Previous pregnancy",
-          "s_interva": "sInterva",
+          "previous_pregnancy_abbr": "Previous pregnancy",
+          "previous_pregnancy": "Pregnancy that caused the trophoblastic tumor",
+          "s_interva_abbr": "Time since last pregnancy interruption",
+          "s_interva": "Time since the pregnancy that caused the trophoblastic tumors has been interrupted",
           "hcg": "hCG",
           "tumor_diametra": "Largest tumor lesion diameter",
           "metastase_location": "Metastases location",
@@ -515,6 +590,19 @@
           "metastasis_number_2": "1 to 4 metastasis",
           "metastasis_number_3": "5 to 8 metastasis",
           "metastasis_number_4": "More than 8 metastasis"
+        }
+      }
+
+      openTip = function(target) {
+        elements = document.querySelectorAll("[data-tip='1']");
+        for (i = 0; i < 7; i++) {
+          if(i + 1 == target) {
+            if (elements[i].classList.contains('hidden')) {
+              elements[i].classList.remove('hidden');
+            } else {
+              elements[i].classList.add('hidden'); 
+            }
+          }
         }
       }
 
@@ -592,6 +680,11 @@
         for (var i = elements.length - 1; i >= 0; i--) {
           elements[i].innerHTML = translations[locale][elements[i].getAttribute('data-t')];
         }
+        elements = document.getElementsByTagName('i'); 
+        for (var i = elements.length - 1; i >= 0; i--) {
+          elements[i].setAttribute('title', translations[locale][elements[i].getAttribute('data-t')]);
+        }
+
         document.getElementById('select-1').options[1] = new Option('<  ' + translations[locale]['years'], '1');
         document.getElementById('select-1').options[2] = new Option('>= ' + translations[locale]['years'], '2');
 
