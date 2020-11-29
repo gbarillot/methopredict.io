@@ -148,10 +148,6 @@
       .hidden {
         display: none;
       }
-      #active a {
-        float: right; 
-        margin-top: 20px;
-      }
       #about {
         height: 400px;
         overflow: scroll;
@@ -318,37 +314,27 @@
             <p class="helper hidden" data-tip="4"><span data-t="hcg_help"></span></p>
             <select onChange="show()" id="select-4">
               <option value="0">...</option>
-              <option value="1">&lt; 1000 UI/l</option>
-              <option value="2">1000 - 10 000 UI/l</option>
-              <option value="3">10 000 - 100 000 UI/l</option>
-              <option value="4">&gt; 100 000 UI/l</option>
             </select>
           </li>
           <li>
-            <label><span data-t="tumor_diametra"></span><i class="tooltip" onClick="openTip(5)">?</i></label>
-            <p class="helper hidden" data-tip="5"><span data-t="tumor_diametra_help"></span></p>
+            <label><span data-t="tumor_diameter"></span><i class="tooltip" onClick="openTip(5)">?</i></label>
+            <p class="helper hidden" data-tip="5"><span data-t="tumor_diameter_help"></span></p>
             <select onChange="show()" id="select-5">
               <option value="0">...</option>
-              <option value="1">&lt; 3 cm</option>
-              <option value="2">3 &lt; 5 cm</option>
-              <option value="3">&ge; 5 cm</option>
             </select>
           </li>
           <li>
-            <label><span data-t="metastase_location"></span></label>
+            <label><span data-t="metastase_location"></span><i class="tooltip" onClick="openTip(6)">?</i></label>
+            <p class="helper hidden" data-tip="6"><span data-t="metastase_location_help"></span></p>
             <select onChange="show()" id="select-6">
               <option value="0">...</option>
             </select>
           </li>
           <li>
-            <label><span data-t="metastase_number"></span><i class="tooltip" onClick="openTip(6)">?</i></label>
-            <p class="helper hidden" data-tip="6"><span data-t="metastase_number_help"></span></p>
+            <label><span data-t="metastase_number"></span><i class="tooltip" onClick="openTip(7)">?</i></label>
+            <p class="helper hidden" data-tip="7"><span data-t="metastase_number_help"></span></p>
             <select onChange="show()" id="select-7">
               <option value="0">...</option>
-              <option value="1">Pas de métastase</option>
-              <option value="2">1 à 4 métastases</option>
-              <option value="3">5 à 8 métastases</option>
-              <option value="4">plus de 8 métastases</option>
             </select>
           </li>
         </ul>
@@ -368,6 +354,9 @@
 
           <p id="placeholder"><span data-t="placeholder"></span></p>
           <div id="active">
+            <div class="result" id="result-0">
+              <p><span data-t="no_result" style="font-size: 16px;line-height: 14px;"></span></p>
+            </div>
             <div class="result" id="result-1">
               <p><b><span data-t="total"></span></b></p>
               <p id="data-1"></p>
@@ -404,120 +393,39 @@
     <script>
       var locale = 'fr';
       var combinations = {
-        "0000000": ['', '', '', '', '', '', ''],
-        "1111111": [118, 0.915, 0.850, 0.959, 0.085, 0.041, 0.150],
-        "0000001": [118, 0.915, 0.850, 0.959,	0.085 ,0.041, 0.150],
-        "0000011": [116, 0.862, 0.786, 0.919, 0.138,,0.081, 0.214],
-        "0000011": [55,	0.909, 0.800, 0.970, 0.091, 0.030, 0.200],
-        "0000011": [25,	0.880, 0.688, 0.975, 0.120, 0.025, 0.312],
-        "0000011": [15,	1.000,0.782, 1.000,	0.000, 0.000, 0.218],
-        "0000011": [3, 1.000, 0.292, 1.000,	0.000, 0.000, 0.708],
-        "0000011": [76, 0.776, 0.666, 0.864, 0.224, 0.136, 0.334],
-        "0000011": [40,	0.950, 0.831 ,0.994, 0.050, 0.006, 0.169],
-        "0000011": [24,	0.917, 0.730, 0.990, 0.083, 0.010, 0.270],
-        "0000011": [22, 0.864, 0.651, 0.971, 0.136, 0.029, 0.349],
-        "0000011": [14, 0.857, 0.572, 0.982,	0.143, 0.018, 0.428],
-        "0000011": [11, 0.818, 0.482, 0.977, 0.182, 0.023, 0.518],
-        "0000011": [9, 0.778, 0.400, 0.972, 0.222, 0.028, 0.600],
-        "0000011": [5, 1.000, 0.478, 1.000, 0.000, 0.000, 0.522],
-        "0000011": [4, 0.750, 0.194, 0.994, 0.250, 0.006, 0.806],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013, 0.987],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [85, 0.706, 0.597, 0.800, 0.294, 0.200, 0.403],
-        "0000011": [28, 0.750, 0.551, 0.893,	0.250, 0.107, 0.449],
-        "0000011": [10, 0.800, 0.444,0.975, 0.200, 0.025, 0.556],
-        "0000011": [8, 0.750, 0.349, 0.968, 0.250, 0.032, 0.651],
-        "0000011": [8, 0.625, 0.245, 0.915, 0.375, 0.085, 0.755],
-        "0000011": [6, 0.833, 0.359, 0.996, 0.167, 0.004, 0.641],
-        "0000011": [6, 1.000, 0.541, 1.000, 0.000, 0.000, 0.459],
-        "0000011": [5, 1.000, 0.478, 1.000, 0.000, 0.000, 0.522],
-        "0000011": [5, 0.800, 0.284, 0.995,	0.200, 0.005, 0.716],
-        "0000011": [5, 0.600, 0.147, 0.947,	0.400, 0.053, 0.853],
-        "0000011": [3, 0.667, 0.094, 0.992,	0.333, 0.008, 0.906],
-        "0000011": [2, 1.000, 0.158, 1.000,	0.000, 0.000, 0.842],
-        "0000011": [2, 1.000, 0.158, 1.000,	0.000, 0.000, 0.842],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975,	1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000,	0.000, 0.000, 0.975],
-        "0000011": [41, 0.683, 0.519, 0.819,	0.317, 0.181, 0.481],
-        "0000011": [18, 0.944, 0.727, 0.999,	0.056, 0.001, 0.273],
-        "0000011": [18, 0.778, 0.524, 0.936,	0.222, 0.064, 0.476],
-        "0000011": [5, 0.800, 0.284, 0.995, 0.200, 0.005,0.716],
-        "0000011": [3, 0.333, 0.008, 0.906, 0.667, 0.094,0.992],
-        "0000011": [3, 0.000, 0.000, 0.708, 1.000, 0.292,1.000],
-        "0000011": [3, 0.667, 0.094, 0.992, 0.333, 0.008,0.906],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000,0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000,0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000,0.842],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013,0.987],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000,0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025,1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000,0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000,0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025,1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025,1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000,0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000,0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025,1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [13, 0.615, 0.316, 0.861,	0.385, 0.139, 0.684],
-        "0000011": [10, 0.600, 0.262, 0.878,	0.400, 0.122, 0.738],
-        "0000011": [10, 0.300, 0.067, 0.652,	0.700, 0.348, 0.933],
-        "0000011": [3, 0.333, 0.008, 0.906, 0.667, 0.094, 0.992],
-        "0000011": [3, 0.667, 0.094, 0.992, 0.333, 0.008, 0.906],
-        "0000011": [3, 0.333, 0.008, 0.906, 0.667, 0.094, 0.992],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013, 0.987],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013, 0.987],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [33, 0.455, 0.281, 0.636,	0.545, 0.364, 0.719],
-        "0000011": [4, 0.750, 0.194, 0.994, 0.250, 0.006, 0.806],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013, 0.987],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 1.000, 0.158, 1.000, 0.000, 0.000, 0.842],
-        "0000011": [2, 0.500, 0.013, 0.987, 0.500, 0.013, 0.987],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 0.000, 0.000, 0.975, 1.000, 0.025, 1.000],
-        "0000011": [1, 1.000, 0.025, 1.000, 0.000, 0.000, 0.975]
+        "1111111": ["91,5%", "[85,0 ; 95,9]", 118],
+        "1112111": ["86,2%", "[78,6 ; 91,9]", 116],
+        "1121111": ["90,9%", "[80,0 ; 97,0]", 55],
+        "1111112": ["100%", "[78,2 ; 100]", 5],
+        "1113111": ["77,6%", "[66,6 ; 86,4]", 76],
+        "1112211": ["91,7%", "[73,0 ; 99,0]", 24],
+        "1112112": ["86,4%", "[65,1 ; 97,1]", 22],
+        "1131111": ["81,8%", "[48,2 ; 97,7]", 11],
+        "1122111": ["77,8%", "[40,0 ; 97,2]", 9],
+        "1121211": ["100%", "[47,8 ; 100]", 5 ],
+        "1121112": ["75,0%", "[19,4 ; 99,4]", 4],
+        "1113211": ["70,6%", "[59,7 ; 80,0]", 85],
+        "1113112": ["80,0%", "[44,4 ; 97,5]", 10],
+        "1313111": ["62,5%", "[24,5 ; 91,5]", 8],
+        "1122211": ["100%", "[54,1 ; 100]", 6 ],
+        "1112212": ["80,0%", "[28,4 ; 99,5]", 5],
+        "1112311": ["60,0%", "[14,7 ; 94,7]", 5],
+        "1113311": ["68,3%", "[51,9 ; 819]	", 41],
+        "1113212": ["77,8%", "[52,4 ; 93,6]", 18],
+        "1113312": ["61,5%", "[31,6 ; 86,1]", 13],
+        "1114211": ["30,0%", "[6,7 ; 65,2]	", 10],
+        "1114311": ["45,5%", "[28,1 ; 63,6]", 33],
+        "1114212": ["75,0%", "[19,4 ; 99,4]", 4],
+        "2111111": ["88,0%", "[68,8 ; 97,5]", 25],
+        "2112111": ["95,0%", "[83,1 ; 99,4]", 40],
+        "2121111": ["85,7%", "[57,2 ; 98,2]", 14],
+        "2113111": ["75,0%", "[55,1 ; 89,3]", 28],
+        "2131111": ["75,0%", "[34,9 ; 96,8]", 8],
+        "2112211": ["83,3%", "[35,9 ; 99,6]", 6],
+        "2112112": ["100%", "[47,8 ; 100]", 5 ],
+        "2113211": ["94,4%", "[72,7 ; 99,9]", 18],
+        "2113112": ["80,0%", "[28,4 ; 99,5]", 5],
+        "2113311": ["60,0%", "[26,2 ; 87,8]", 10]
       }
 
       var translations = {
@@ -533,9 +441,17 @@
           "s_interva": "Intervalle depuis l’arrêt de la grossesse à l’origine de la tumeur trophoblastique: il s’agit par exemple de la durée en mois entre le 1er curetage pour une môle et la date de début du méthotrexate",
           "hcg": "hCG",
           "hcg_help": "Il s’agit de l’hCG le plus récent avant le début du traitement par méthotrexate",
-          "tumor_diametra": "Diamètre plus grosse lésion tumorale",
-          "tumor_diametra_help": "Il peut s’agir soit de la taille de la tumeur utérine, soit d’une lésion métastatique. Il est nécessaire de choisir la localisation dont le diamètre est le plus grand",
+          "hcg_1": "< 1000 UI/l",
+          "hcg_2": "1000 - 10 000 UI/l",
+          "hcg_3": "10 000 - 100 000 UI/l",
+          "hcg_4": "> 100 000 UI/l",
+          "tumor_diameter": "Diamètre plus grosse lésion tumorale",
+          "tumor_diameter_help": "Il peut s’agir soit de la taille de la tumeur utérine, soit d’une lésion métastatique. Il est nécessaire de choisir la localisation dont le diamètre est le plus grand",
+          "tumor_diameter_1": "< 3 cm",
+          "tumor_diameter_2": "> 3 et <= 5 cm",
+          "tumor_diameter_3": "> 5 cm",
           "metastase_location": "Site des metastases",
+          "metastase_location_help": "Selon le bilan d’imagerie",
           "metastase_number": "Nombre de metastases",
           "metastase_number_help": "Seules les métastases visibles sur radio de thorax sont comptées",
           "total": "Effectif de patientes correspondant à cet ensemble de paramètres",
@@ -561,7 +477,8 @@
           "about_1": "Les données présentées sur ce site proviennent de l’analyse rétrospective de la cohorte de 965 patientes enregistrées au Centre Français de Référence (www.mole-chorio.com) entre 1999 et 2019 pour le traitement d’une tumeur trophoblastique gestationnelle à bas risque de résistance à la monochimiothérapie (score FIGO ≤6).",
           "about_2": "La combinaison de chacun des paramètres suivant permet de connaître probabilité observée dans cette cohorte concernant le succès du méthotrexate utilisé selon le schéma 8-day (injection intra-musculaire de 1mg/Kg à J1, J3, J5 et J7 suivi d’acide folique oral 10mg à J2, J4, J6 et J8, les cures recommençant chaque J15).",
           "about_3": "Certaines combinaisons n’ont jamais été rencontrées ou trop peu fréquemment pour fournir une estimation des chances de succès.",
-          "about_4": "<b>Attention:</b> la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques."
+          "about_4": "<b>Attention:</b> la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques.",
+          "no_result": "Désolé, cette combinaison est trop rare dans notre base de données pour fournir une estimation de la probabilité de succès. <a href='#' onclick='contact()' style='color: blue'>Contactez-nous</a> directement pour davantage de précisions."
         },
         "en": {
           "title": "French Reference Center for Trophoblastic Diseases",
@@ -570,31 +487,38 @@
           "age": "Patient age",
           "age_help": "How old is the patient as of today",
           "previous_pregnancy_abbr": "Previous pregnancy",
-          "previous_pregnancy": "Pregnancy that caused the trophoblastic tumor",
+          "previous_pregnancy": "Pregnancy causing the trophoblastic tumor",
           "s_interva_abbr": "Time since last pregnancy interruption",
-          "s_interva": "Time since the pregnancy that caused the trophoblastic tumors has been interrupted",
+          "s_interva": "Interval between termination of causative pregnancy (curettage) to the first methotrexate injection",
           "hcg": "hCG",
           "hcg_help": "Most recent hCG before starting treatment with methotrexate",
-          "tumor_diametra": "Largest tumor lesion diameter",
-          "tumor_diametra_help": "This may be either the size of the uterine tumor or a metastatic lesion. It is necessary to choose the location with the largest tumor size.",
+          "hcg_1": "< 1000 UI/l",
+          "hcg_2": "1000 - 10 000 UI/l",
+          "hcg_3": "10 000 - 100 000 UI/l",
+          "hcg_4": "> 100 000 UI/l",
+          "tumor_diameter": "Largest tumor mass diameter",
+          "tumor_diameter_help": "This may be either the size of the uterine tumor or a metastatic lesion. It is necessary to choose the location with the largest tumor size.",
+          "tumor_diameter_1": "< 3 cm",
+          "tumor_diameter_2": "> 3cm and <= 5 cm",
+          "tumor_diameter_3": "> 5 cm",
           "metastase_location": "Metastases location",
+          "metastase_location_help": "According to imaging",
           "metastase_number": "Number of metastases",
           "metastase_number_help": "Only metastases seen on chest X-ray should be considered",
           "total": "Total cohort",
-          "probability_success": "Success probability (confidence rate 95%)",
-          "probability_failure": "Failure probability (confidence rate 95%)",
+          "probability_success": "Methotrexate probability of success (95% confidence interval)",
+          "probability_failure": "Failure probability (95% confidence interval)",
           "reset": "Reset form",
           "about_content": "After thirty years of intensive research lorem ipsum dolor sit amet constectetur ad piscim elit",
           "back_to_form": "Back to form",
           "years": "40 years old",
-          "horst": "Horst",
-          "delivery": "Delivery",
+          "horst": "Mole",
           "abortion": "Abortion",
           "s_interva_1": "< 4 months",
           "s_interva_2": "4 to 6 months",
           "s_interva_3": "7 to 12 months",
-          "s_interva_4": "more than 13 months",
-          "metastasis_location_1": "No lung metastasis or metastasis",
+          "s_interva_4": "more than 13 months",          
+          "metastasis_location_1": "No metastases seen or only lung metastases seen",
           "metastasis_location_2": "Spleen / kidney",
           "metastasis_location_3": "Digestive tract",
           "metastasis_number_1": "No metastasis",
@@ -604,13 +528,14 @@
           "about_1": "The data presented on this website come from the retrospective analysis of the 965-patient French Reference Center cohort registered on www.mole-chorio.com between 1999 and 2019 for the treatment of a low-risk gestational trophoblastic tumor (FIGO score ≤6).",
           "about_2": "The combination of each of the following parameters provides an estimation of the methotrexate probability of success when used according to the 8-day protocole (intramuscular injection of 1 mg / Kg on D1, D3, D5 and D7 followed by oral folinic acid rescue at 10mg on D2, D4, D6 and D8, the cures starting again each D15).",
           "about_3": "Some combinations have never been encountered or too infrequently to provide an estimate of the chances of success.", 
-          "about_4": "<b>Important note:</b> the prescription of methotrexate is the responsibility of a physician, after prior discussion in a multidisciplinary trophoblastic tumors specialized board (Lyon Sud University Hospital). The methotrexate chances of success estimation is provided for information only and does not engage the responsibility of the French Reference Center for Trophoblastic Diseases."
+          "about_4": "<b>Important note:</b> the prescription of methotrexate is the responsibility of a physician, after prior discussion in a multidisciplinary trophoblastic tumors specialized board (Lyon Sud University Hospital). The methotrexate chances of success estimation is provided for information only and does not engage the responsibility of the French Reference Center for Trophoblastic Diseases.",
+          "no_result": "We're sorry but the this combination is too rare in our database to get an accurate success rate. <a  href='#' onclick='contact()' style='color: blue'>Contact use</a> if you want more details."
         }
       }
 
       openTip = function(target) {
         elements = document.querySelectorAll("[data-tip]");
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 7; i++) {
           if(i + 1 == target) {
             if (elements[i].classList.contains('hidden')) {
               elements[i].classList.remove('hidden');
@@ -623,7 +548,7 @@
         return false;
       }
 
-      function grab() {
+      grab = function() {
         var combination = "";
         for (i = 1; i < 8; i++) {
           combination = combination + document.getElementById('select-' + i).value;
@@ -632,21 +557,39 @@
         return combination;
       }
 
-      function show() {
+      contact = function() {
+        addr = "user@domain.fr"
+        var part_1 = "touria.hajri";
+        var part_2 = "chu-lyon";
+        window.location.href = "mailto:" + addr.replace('user', part_1).replace('domain', part_2);
+      }      
+
+      show = function() {
         var key = grab();
         var values = combinations[key];
 
         document.getElementById('about').classList.add('hidden');
 
-        if(key == '0000000' || typeof values == 'undefined') {
+        if(key[0] == '0' || key[1] == '0' || key[2] == '0' || key[3] == '0' || key[4] == '0' || key[5] == '0' || key[6] == '0') {
           document.getElementById('placeholder').classList.remove('hidden');
           document.getElementById('active').classList.add('hidden');
-        } else {        
+        } else {    
           document.getElementById('placeholder').classList.add('hidden');
-          document.getElementById('active').classList.remove('hidden');        
+          document.getElementById('active').classList.remove('hidden');
+
+          if(typeof values == 'undefined') {
+            document.getElementById('result-0').classList.remove('hidden');
+            document.getElementById('result-1').classList.add('hidden');
+            document.getElementById('result-2').classList.add('hidden');
+          } else {
         
-          document.getElementById('data-1').innerHTML = values[0]; 
-          document.getElementById('data-2').innerHTML = values[1] + " [" + values[2] + ";" + values[3] + "]"; 
+            document.getElementById('result-0').classList.add('hidden');
+            document.getElementById('result-1').classList.remove('hidden');
+            document.getElementById('result-2').classList.remove('hidden');
+
+            document.getElementById('data-1').innerHTML = values[2]; 
+            document.getElementById('data-2').innerHTML = values[0] + " " + values[1]; 
+          }
         }       
       }
 
@@ -696,22 +639,25 @@
         for (var i = elements.length - 1; i >= 0; i--) {
           elements[i].innerHTML = translations[locale][elements[i].getAttribute('data-t')];
         }
-        elements = document.getElementsByTagName('i'); 
-        for (var i = elements.length - 1; i >= 0; i--) {
-          elements[i].setAttribute('title', translations[locale][elements[i].getAttribute('data-t')]);
-        }
 
         document.getElementById('select-1').options[1] = new Option('<  ' + translations[locale]['years'], '1');
         document.getElementById('select-1').options[2] = new Option('>= ' + translations[locale]['years'], '2');
 
         document.getElementById('select-2').options[1] = new Option(translations[locale]['horst'], '1');
-        document.getElementById('select-2').options[2] = new Option(translations[locale]['delivery'], '2');
-        document.getElementById('select-2').options[3] = new Option(translations[locale]['abortion'], '3');
+        document.getElementById('select-2').options[2] = new Option(translations[locale]['abortion'], '3');
 
         document.getElementById('select-3').options[1] = new Option(translations[locale]['s_interva_1'], '1');
         document.getElementById('select-3').options[2] = new Option(translations[locale]['s_interva_2'], '2');
         document.getElementById('select-3').options[3] = new Option(translations[locale]['s_interva_3'], '3');
         document.getElementById('select-3').options[4] = new Option(translations[locale]['s_interva_4'], '4');
+
+        document.getElementById('select-4').options[1] = new Option(translations[locale]['hcg_1'], '1');
+        document.getElementById('select-4').options[2] = new Option(translations[locale]['hcg_2'], '2');
+        document.getElementById('select-4').options[3] = new Option(translations[locale]['hcg_3'], '3');
+
+        document.getElementById('select-5').options[1] = new Option(translations[locale]['tumor_diameter_1'], '1');
+        document.getElementById('select-5').options[2] = new Option(translations[locale]['tumor_diameter_2'], '2');
+        document.getElementById('select-5').options[3] = new Option(translations[locale]['tumor_diameter_3'], '3');
 
         document.getElementById('select-6').options[1] = new Option(translations[locale]['metastasis_location_1'], '1');
         document.getElementById('select-6').options[2] = new Option(translations[locale]['metastasis_location_2'], '2');
