@@ -396,7 +396,7 @@
         "1111111": ["91,5%", "[85,0 ; 95,9]", 118],
         "1112111": ["86,2%", "[78,6 ; 91,9]", 116],
         "1121111": ["90,9%", "[80,0 ; 97,0]", 55],
-        "1111112": ["100%", "[78,2 ; 100]", 5],
+        "1111112": ["100%", "[78,2 ; 100]", 15],
         "1113111": ["77,6%", "[66,6 ; 86,4]", 76],
         "1112211": ["91,7%", "[73,0 ; 99,0]", 24],
         "1112112": ["86,4%", "[65,1 ; 97,1]", 22],
@@ -477,7 +477,7 @@
           "about_1": "Les données présentées sur ce site proviennent de l’analyse rétrospective de la cohorte de 965 patientes enregistrées au Centre Français de Référence (www.mole-chorio.com) entre 1999 et 2019 pour le traitement d’une tumeur trophoblastique gestationnelle à bas risque de résistance à la monochimiothérapie (score FIGO ≤6).",
           "about_2": "La combinaison de chacun des paramètres suivant permet de connaître probabilité observée dans cette cohorte concernant le succès du méthotrexate utilisé selon le schéma 8-day (injection intra-musculaire de 1mg/Kg à J1, J3, J5 et J7 suivi d’acide folique oral 10mg à J2, J4, J6 et J8, les cures recommençant chaque J15).",
           "about_3": "Certaines combinaisons n’ont jamais été rencontrées ou trop peu fréquemment pour fournir une estimation des chances de succès.",
-          "about_4": "<b>Attention:</b> la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeur trophoblastique (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques.",
+          "about_4": "<b>Attention:</b> la prescription du méthotrexate relève d’un médecin, après discussion préalable en réunion de concertation pluridisciplinaire spécialisée des tumeurs trophoblastiques (CHU Lyon Sud). L’estimation des chances de succès est fournie à titre informatif et ne saurait engager la responsabilité du Centre Français de Référence des Maladies Trophoblastiques.",
           "no_result": "Désolé, cette combinaison est trop rare dans notre base de données pour fournir une estimation de la probabilité de succès. <a href='#' onclick='contact()' style='color: blue'>Contactez-nous</a> directement pour davantage de précisions."
         },
         "en": {
@@ -513,11 +513,12 @@
           "back_to_form": "Back to form",
           "years": "40 years old",
           "horst": "Mole",
+          "delivery": "Delivery",
           "abortion": "Abortion",
           "s_interva_1": "< 4 months",
           "s_interva_2": "4 to 6 months",
           "s_interva_3": "7 to 12 months",
-          "s_interva_4": "more than 13 months",          
+          "s_interva_4": "More than 13 months",          
           "metastasis_location_1": "No metastases seen or only lung metastases seen",
           "metastasis_location_2": "Spleen / kidney",
           "metastasis_location_3": "Digestive tract",
@@ -529,7 +530,7 @@
           "about_2": "The combination of each of the following parameters provides an estimation of the methotrexate probability of success when used according to the 8-day protocole (intramuscular injection of 1 mg / Kg on D1, D3, D5 and D7 followed by oral folinic acid rescue at 10mg on D2, D4, D6 and D8, the cures starting again each D15).",
           "about_3": "Some combinations have never been encountered or too infrequently to provide an estimate of the chances of success.", 
           "about_4": "<b>Important note:</b> the prescription of methotrexate is the responsibility of a physician, after prior discussion in a multidisciplinary trophoblastic tumors specialized board (Lyon Sud University Hospital). The methotrexate chances of success estimation is provided for information only and does not engage the responsibility of the French Reference Center for Trophoblastic Diseases.",
-          "no_result": "We're sorry but the this combination is too rare in our database to get an accurate success rate. <a  href='#' onclick='contact()' style='color: blue'>Contact use</a> if you want more details."
+          "no_result": "We're sorry but the this combination is too rare in our database to get an accurate success rate. <a  href='#' onclick='contact()' style='color: blue'>Contact us</a> if you want more details."
         }
       }
 
@@ -644,7 +645,8 @@
         document.getElementById('select-1').options[2] = new Option('>= ' + translations[locale]['years'], '2');
 
         document.getElementById('select-2').options[1] = new Option(translations[locale]['horst'], '1');
-        document.getElementById('select-2').options[2] = new Option(translations[locale]['abortion'], '3');
+        document.getElementById('select-2').options[2] = new Option(translations[locale]['delivery'], '2');
+        document.getElementById('select-2').options[3] = new Option(translations[locale]['abortion'], '3');
 
         document.getElementById('select-3').options[1] = new Option(translations[locale]['s_interva_1'], '1');
         document.getElementById('select-3').options[2] = new Option(translations[locale]['s_interva_2'], '2');
